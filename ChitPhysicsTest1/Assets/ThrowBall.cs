@@ -5,7 +5,9 @@ using UnityEngine;
 public class ThrowBall : MonoBehaviour
 {
     Rigidbody rb;
+    [Range(300, 450)]
     public int horizontalforce = 100;
+    [Range(50, 100)]
     public int verticalforce = 100;
 
     // Start is called before the first frame update
