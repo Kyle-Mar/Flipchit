@@ -1,15 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+
 
 public class ThrowBall : MonoBehaviour
 {
     Rigidbody rb;
-    [Range(300, 450)]
-    public int horizontalforce = 100;
-    [Range(50, 100)]
-    public int verticalforce = 100;
-
+    public GameObject target;
+    DateTime start;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,9 +20,20 @@ public class ThrowBall : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("HELLO");
+            start = DateTime.Now;
             rb.useGravity = true;
-            rb.AddForce(new Vector3(0, verticalforce, horizontalforce));
+            float zDist = Mathf.Abs(target.transform.position.z - transform.position.z);
+            float yDist = Mathf.Abs(target.transform.position.y - transform.position.y);
+            //Debug.Log(yDist + " " + Mathf.Sqrt(yDist / Physics.gravity.magnitude) + " " + zDist);
+            Vector3 correct_velocity = new Vector3(0, 0, zDist / Mathf.Sqrt(yDist / 5.12f));
+            rb.velocity = new Vector3(0, 0, correct_velocity.z);
+            //Debug.Log(rb.velocity);
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(DateTime.Now - start);
+        //Debug.Log(collision.contacts[0].point);
     }
 }
