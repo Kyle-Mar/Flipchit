@@ -293,14 +293,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.019827379, y: 0.695429, z: -0.01920224, w: 0.7180645}
-  m_LocalPosition: {x: -17.83, y: 1.16, z: 2.09}
+  m_LocalRotation: {x: 0.5079423, y: 0.49192947, z: -0.49192947, w: 0.5079423}
+  m_LocalPosition: {x: -0.0891037, y: 23.09, z: 2.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 3.163, y: 88.165, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 88.165, z: 0}
 --- !u!1001 &996010804
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -420,6 +420,52 @@ MonoBehaviour:
   forceMultiplicationAmount: 15
   maxForceMagnitude: 30
   multiplicationEnabled: 1
+--- !u!1 &1186241529
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1186241530}
+  - component: {fileID: 1186241531}
+  m_Layer: 0
+  m_Name: THROWER (TEMP?)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1186241530
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186241529}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.182791, y: 2.969508, z: -2.0461948}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1186241531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186241529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d069c75743fd904c9d6ec688297250f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1871216178}
+  ball: {fileID: 1657250291}
 --- !u!1 &1256046550
 GameObject:
   m_ObjectHideFlags: 0
@@ -550,7 +596,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01470c98bf451ed4e976858dc2f88ca3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1871216178}
 --- !u!135 &1657250293
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -658,7 +703,7 @@ GameObject:
   - component: {fileID: 1871216180}
   - component: {fileID: 1871216179}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
