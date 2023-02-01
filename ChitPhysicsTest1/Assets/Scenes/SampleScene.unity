@@ -503,6 +503,19 @@ MonoBehaviour:
   forceMultiplicationAmount: 15
   maxForceMagnitude: 30
   multiplicationEnabled: 1
+--- !u!114 &996010812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 996010805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4774a5acbaa77d4187670924f7ae08e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chitHasBeenHit: 0
 --- !u!1 &1186241529
 GameObject:
   m_ObjectHideFlags: 0
