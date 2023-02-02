@@ -17,7 +17,7 @@ namespace FlipChit
         // this is called after the points are calculated.
         // This will be used in order to send new information to the 
         // Game manager script.
-        public delegate void OnScore(float score);
+        public delegate void OnScore(int points);
         public static event OnScore OnPointsCalculated;
 
         void Start()
