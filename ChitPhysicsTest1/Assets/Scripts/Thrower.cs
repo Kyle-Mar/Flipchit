@@ -2,30 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Thrower : MonoBehaviour
+namespace FlipChit
 {
-    // Start is called before the first frame update
-
-    public GameObject target;
-    public GameObject ball;
-    public GameObject StartPos;
-    Ball ballScript;
-    void Start()
+    public class Thrower : MonoBehaviour
     {
-        ballScript = ball.GetComponent<Ball>();
-    }
+        // Start is called before the first frame update
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space) && !ballScript.InPlay)
+        public GameObject target;
+        public GameObject ball;
+        public GameObject StartPos;
+        Ball ballScript;
+        void Start()
         {
-            ballScript.ThrowAt(target.transform.position);
-            ballScript.Spin(Ball.SpinDirection.CLOCKWISE, 0, 0);
+            ballScript = ball.GetComponent<Ball>();
         }
-        if (Input.GetKeyDown(KeyCode.R))
+
+        // Update is called once per frame
+        void Update()
         {
-            ballScript.ResetBall(StartPos.transform.position);
+            if (Input.GetKeyDown(KeyCode.Space) && !ballScript.InPlay)
+            {
+                ballScript.ThrowAt(target.transform.position);
+                ballScript.Spin(Ball.SpinDirection.CLOCKWISE, 0, 0);
+            }
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                ballScript.ResetBall(StartPos.transform.position);
+            }
         }
     }
 }
