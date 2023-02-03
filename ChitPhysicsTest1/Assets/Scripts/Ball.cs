@@ -83,11 +83,11 @@ public class Ball : MonoBehaviour
         {
             case SpinDirection.CLOCKWISE:
                 rb.AddTorque(new Vector3(0f, spinAmount, 0f));
-                StartCoroutine(doSpinForce(spinAmount, transform.right, forceAcceleration));
+                StartCoroutine(doSpinForce(spinAmount, Vector3.right, forceAcceleration));
                 break;
             case SpinDirection.COUNTERCLOCKWISE:
                 rb.AddTorque(new Vector3(0f, -spinAmount, 0f));
-                StartCoroutine(doSpinForce(spinAmount, -transform.right, forceAcceleration));
+                StartCoroutine(doSpinForce(spinAmount, -Vector3.right, forceAcceleration));
                 break;
             default:
                 Debug.LogError($"[Ball.cs] Invalid Spin Direction {spinDirection}");
@@ -103,6 +103,7 @@ public class Ball : MonoBehaviour
     {
         rb.useGravity = false;
         rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
         InPlay = false;
         transform.position = position;
     }
@@ -112,12 +113,13 @@ public class Ball : MonoBehaviour
         // stop the ball from spinning after reset.
         if (!InPlay)
         {
+            
             yield return null;
         }
-
         float curSpinForce = forceAcceleration;
         while(curSpinForce < finalSpinForce)
         {
+            //Debug.Log("yeet" + " " + curSpinForce + " " + finalSpinForce);
             curSpinForce += forceAcceleration;
             rb.AddForce(forceVector * curSpinForce);
             yield return new WaitForSeconds(Time.fixedDeltaTime);
