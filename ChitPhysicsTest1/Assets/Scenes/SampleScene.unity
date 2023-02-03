@@ -417,7 +417,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f1446c5225c8ae74b87e6a804ebc0345, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 7.39
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f1446c5225c8ae74b87e6a804ebc0345, type: 3}
       propertyPath: m_LocalRotation.w
@@ -550,6 +550,7 @@ MonoBehaviour:
   target: {fileID: 1737503677}
   ball: {fileID: 1657250291}
   StartPos: {fileID: 1980251468}
+  maxThrowVar: 25
 --- !u!1 &1256046550
 GameObject:
   m_ObjectHideFlags: 0
