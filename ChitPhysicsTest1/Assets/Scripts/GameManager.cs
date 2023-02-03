@@ -22,7 +22,7 @@ namespace FlipChit
         // Update is called once per frame
         void Update()
         {
-            Debug.Log(score);
+            //Debug.Log(score);
         }
 
         void UpdateScore(int points)

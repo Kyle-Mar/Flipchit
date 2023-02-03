@@ -14,6 +14,8 @@ namespace FlipChit
         Ball ballScript;
         void Start()
         {
+            target = GameObject.Find("Target");
+            ball = GameObject.Find("Ball");
             ballScript = ball.GetComponent<Ball>();
         }
 
