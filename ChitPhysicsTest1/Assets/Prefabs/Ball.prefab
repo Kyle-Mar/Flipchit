@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8448312174165981038}
   - component: {fileID: 8448312174165981027}
   - component: {fileID: 5611884629206816148}
-  - component: {fileID: 840097336259912411}
+  - component: {fileID: 3573336199647328560}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Ball
@@ -146,7 +146,7 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &840097336259912411
+--- !u!114 &3573336199647328560
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -155,7 +155,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8448312174165981033}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Script: {fileID: 11500000, guid: df2868252ab5c4d1da357e8f11f1b524, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SyncPositionX: 1

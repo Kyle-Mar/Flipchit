@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
 namespace FlipChit
 {
-    public class Thrower : MonoBehaviour
+    public class Thrower : NetworkBehaviour
     {
         // Start is called before the first frame update
 
@@ -22,15 +23,36 @@ namespace FlipChit
         // Update is called once per frame
         void Update()
         {
+            if (!IsOwner)
+            {
+                return;
+            }
+
             if (Input.GetKeyDown(KeyCode.Space) && !ballScript.InPlay)
             {
-                ballScript.ThrowAt(target.transform.position);
-                ballScript.Spin(Ball.SpinDirection.CLOCKWISE, 0, 0);
+                if (IsClient) {
+                    ThrowServerRpc();        
+                }
+                else
+                {
+                    ballScript.ThrowAt(target.transform.position);
+                    ballScript.Spin(Ball.SpinDirection.CLOCKWISE, 0, 0);
+                }
+                
             }
             if (Input.GetKeyDown(KeyCode.R))
             {
                 ballScript.ResetBall(StartPos.transform.position);
             }
         }
+
+        // Ask the server to throw the ball pretty please :)
+        [ServerRpc]
+        void ThrowServerRpc()
+        {
+            ballScript.ThrowAt(target.transform.position);
+            ballScript.Spin(Ball.SpinDirection.CLOCKWISE, 0, 0);
+        }
+
     }
 }
