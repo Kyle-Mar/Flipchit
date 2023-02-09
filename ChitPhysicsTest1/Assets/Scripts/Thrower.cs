@@ -12,6 +12,7 @@ namespace FlipChit
         public GameObject target;
         public GameObject ball;
         public GameObject StartPos;
+        public Camera cam;
 
         Ball ballScript;
         float maxSpinSpeed = 25;
@@ -127,7 +128,7 @@ namespace FlipChit
 
         float CalculateVariance(Touch touch)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+            Ray ray = cam.ScreenPointToRay(Input.GetTouch(0).position);
             RaycastHit hit;
             Physics.Raycast(ray, out hit, Mathf.Infinity);
 
