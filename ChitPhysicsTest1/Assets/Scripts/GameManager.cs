@@ -64,6 +64,7 @@ namespace FlipChit
 
             // Position to spawn the player object (if null it uses default of Vector3.zero)
             SpawnPos spawnPos = GetSpawnPosition(ref OnePlayerTeamSpawnPositions);
+            spawnPos.spawnPosition.occupyingClientId = request.ClientNetworkId;
             response.Position = spawnPos.gameObject.transform.position;
 
             // Rotation to spawn the player object (if null it uses the default of Quaternion.identity)

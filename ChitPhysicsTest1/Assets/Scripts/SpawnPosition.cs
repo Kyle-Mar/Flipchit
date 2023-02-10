@@ -5,5 +5,5 @@ using UnityEngine;
 public class SpawnPosition : MonoBehaviour
 {
     public bool IsOccupied = false;
-    public int occupyingClientId;
+    public ulong occupyingClientId;
 }
