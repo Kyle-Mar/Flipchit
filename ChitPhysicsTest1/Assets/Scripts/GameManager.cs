@@ -5,6 +5,15 @@ using Unity.Netcode;
 
 namespace FlipChit
 {
+
+    // Return type wrapper
+    public struct SpawnPos{
+
+        public bool isSuccessful;
+        public GameObject gameObject;
+        public SpawnPosition spawnPosition;
+    }
+
     public class GameManager : MonoBehaviour
     {
         // Presumably, you'd have two instances of a team with a score for each.
@@ -39,6 +48,7 @@ namespace FlipChit
         // TODO: Modify spawn position.
         private void ApprovalCheck(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response)
         {
+            Debug.Log("HELLO");
             // The client identifier to be authenticated
             var clientId = request.ClientNetworkId;
 
@@ -53,7 +63,8 @@ namespace FlipChit
             response.PlayerPrefabHash = null;
 
             // Position to spawn the player object (if null it uses default of Vector3.zero)
-            response.Position = Vector3.zero;
+            SpawnPos spawnPos = GetSpawnPosition(ref OnePlayerTeamSpawnPositions);
+            response.Position = spawnPos.gameObject.transform.position;
 
             // Rotation to spawn the player object (if null it uses the default of Quaternion.identity)
             response.Rotation = Quaternion.identity;
@@ -64,9 +75,36 @@ namespace FlipChit
 
             // If additional approval steps are needed, set this to true until the additional steps are complete
             // once it transitions from true to false the connection approval response will be processed.
-
             
             response.Pending = false;
+        }
+        
+        public SpawnPos GetSpawnPosition(ref GameObject[] spawnPositions)
+        {
+            GameObject spawnPosition = null;
+
+            for(int i = 0; i < spawnPositions.Length; i++)
+            {
+                if (!spawnPositions[i].GetComponent<SpawnPosition>().IsOccupied)
+                {
+                    spawnPosition = spawnPositions[i];
+                    spawnPosition.GetComponent<SpawnPosition>().IsOccupied = true;
+                    break;
+                }
+            }
+
+            if (spawnPosition == null)
+            {
+                Debug.LogError("[GameManager.cs] No valid spawn position found on connection");
+            }
+
+            SpawnPos ret = new SpawnPos();
+            ret.gameObject = spawnPosition;
+            ret.spawnPosition = spawnPosition.GetComponent<SpawnPosition>();
+            ret.isSuccessful = spawnPosition != null;
+
+            return ret;
+
         }
     }
 }
