@@ -25,6 +25,7 @@ namespace FlipChit
         void Start()
         {
             ScoreDetection.OnPointsCalculated += UpdateScore;
+            // Allow us to modify when a player can connect.
             NetworkManager.Singleton.ConnectionApprovalCallback = ApprovalCheck;
         }
 
@@ -44,8 +45,7 @@ namespace FlipChit
             score += points;
         }
 
-        // see https://docs-multiplayer.unity3d.com/netcode/current/basics/connection-approval/index.html
-        // TODO: Modify spawn position.
+        // see https://docs-multiplayer.unity3d.com/netcode/current/basics/connection-approval/index.
         private void ApprovalCheck(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response)
         {
             Debug.Log("HELLO");
@@ -63,6 +63,9 @@ namespace FlipChit
             response.PlayerPrefabHash = null;
 
             // Position to spawn the player object (if null it uses default of Vector3.zero)
+
+            // Choose a spawn position. in the future, we will have a payload that is sent
+            // with each player to determine which team.
             SpawnPos spawnPos = GetSpawnPosition(ref OnePlayerTeamSpawnPositions);
             spawnPos.spawnPosition.occupyingClientId = request.ClientNetworkId;
             response.Position = spawnPos.gameObject.transform.position;
@@ -84,6 +87,7 @@ namespace FlipChit
         {
             GameObject spawnPosition = null;
 
+            // loop through each spawn position and choose an unoccupied spawn position.
             for(int i = 0; i < spawnPositions.Length; i++)
             {
                 if (!spawnPositions[i].GetComponent<SpawnPosition>().IsOccupied)
@@ -94,11 +98,13 @@ namespace FlipChit
                 }
             }
 
+            // If we did not find a spawn position, we have a problem.
             if (spawnPosition == null)
             {
                 Debug.LogError("[GameManager.cs] No valid spawn position found on connection");
             }
 
+            // make a new spawnpos struct to package the return information
             SpawnPos ret = new SpawnPos();
             ret.gameObject = spawnPosition;
             ret.spawnPosition = spawnPosition.GetComponent<SpawnPosition>();

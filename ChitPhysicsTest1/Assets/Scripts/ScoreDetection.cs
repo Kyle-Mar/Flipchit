@@ -28,6 +28,11 @@ namespace FlipChit
         // Update is called once per frame
         void Update()
         {
+            /*---------------NOTE---------------
+            / THIS IS ENTIRELY INACCURATE TO HOW THE REAL GAME FUNCTIONS
+            / DO NOT BASE ANY FUTURE CODE OFF OF THIS
+            / THIS NEEDS A REWORK
+            */
             if (chitHasBeenHit == false)
             {
                 return;
@@ -48,6 +53,11 @@ namespace FlipChit
             }
         }
 
+        /// <summary>
+        /// Calculates the points to add
+        /// </summary>
+        /// <param name="hit">Whether the chit was hit</param>
+        /// <param name="flipped">Whether the chit flipped to the other side</param>
         private void CalculatePoints(bool hit, bool flipped)
         {
             int points = 0;
@@ -59,9 +69,10 @@ namespace FlipChit
             {
                 points += 2;
             }
+            // Let whatever needs to know that there are new points to be added!
             OnPointsCalculated?.Invoke(points);
         }
-
+        // save the init up direction and flag that the chithasbeenhit but not yet flipped.
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.CompareTag("Ball"))

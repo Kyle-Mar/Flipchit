@@ -22,7 +22,8 @@ public class ChitCollision : MonoBehaviour
     {
 
     }
-
+    // In testing the ball didn't hit the chit nearly hard enough.
+    // So we multiply the force applied to the chit based on the center of mass and the impact's distance from it.
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ball") && multiplicationEnabled)
@@ -30,6 +31,7 @@ public class ChitCollision : MonoBehaviour
             // multiply the force by distance between center of mass and the point of contact
             Vector3 forceToApply = collision.impulse * Vector3.Distance(rb.centerOfMass, collision.GetContact(0).point);
             forceToApply *= forceMultiplicationAmount;
+            // Prevent extreme cases where the force is much too high
             forceToApply = Vector3.ClampMagnitude(forceToApply, maxForceMagnitude);
             rb.AddForce(forceToApply);
         }

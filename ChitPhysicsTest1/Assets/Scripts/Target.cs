@@ -23,7 +23,10 @@ namespace FlipChit
                 PlaceAroundObject(DevianceAmount);
             }
         }
-
+        /// <summary>
+        /// Picks a random point in a circle around the target
+        /// </summary>
+        /// <param name="devianceAmount">The radius of the circle</param>
         public void PlaceAroundObject(float devianceAmount)
         {
             Vector3 devianceCircle = new Vector3(Random.insideUnitCircle.x, 0f, Random.insideUnitCircle.y) * devianceAmount;

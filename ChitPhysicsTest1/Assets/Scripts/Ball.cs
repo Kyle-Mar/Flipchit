@@ -111,6 +111,13 @@ namespace FlipChit
             transform.position = position;
         }
 
+        /// <summary>
+        /// Adds a cumulative force overtime to the ball because the torque on the ball does not move it in the air.
+        /// </summary>
+        /// <param name="finalSpinForce">The maximum spin force that will be applied to the ball before it stops applying force.</param>
+        /// <param name="forceVector">The direction the force will be applied in.</param>
+        /// <param name="forceAcceleration">How quickly will the force be applied. (Often results in less force being added)</param>
+        /// <returns></returns>
         private IEnumerator doSpinForce(float finalSpinForce, Vector3 forceVector, float forceAcceleration)
         {
             // stop the ball from spinning after reset.
@@ -124,6 +131,7 @@ namespace FlipChit
             {
                 curSpinForce += forceAcceleration;
                 rb.AddForce(forceVector * curSpinForce);
+                // We want this to sync up with the physics step.
                 yield return new WaitForSeconds(Time.fixedDeltaTime);
 
             }
