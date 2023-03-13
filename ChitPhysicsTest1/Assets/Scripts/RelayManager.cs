@@ -25,7 +25,7 @@ public class RelayManager : MonoBehaviour
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
     }
 
-    public async Task<string> CreateRelay()
+    public async Task<Result<string>> CreateRelay()
     {
        
         try
@@ -46,22 +46,20 @@ public class RelayManager : MonoBehaviour
             NetworkManager.Singleton.StartHost();
             
             // If we're able to make a new server return the game code task.
-            return await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
-
+            string gameCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
+            return new Result<string>(gameCode);
 
 
         } catch (RelayServiceException e)
         {
-            // because the return type is task we need to make a new task to pass an error message back to the origin.
-            // This is a task that immediately resolves to the string "ERROR"
-            Task<string> task = new Task<string>(() => "ERROR");
+            
             Debug.Log(e);
-            return await task;
+            return new Result<string>(null);
         }
 
     }
 
-    public async Task<string> JoinRelay(string joinCode)
+    public async Task<Result<string>> JoinRelay(string joinCode)
     {
         try
         {
@@ -82,13 +80,12 @@ public class RelayManager : MonoBehaviour
 
             NetworkManager.Singleton.StartClient();
 
-            return await new Task<string>(() => "SUCCESS");
+            return new Result<string>("SUCCESS");
 
         }
         catch (RelayServiceException e)
         {
-            Debug.Log(e);
-            return await new Task<string>(() => "ERROR");
+            return new Result<string>(null);
         }
     }
         

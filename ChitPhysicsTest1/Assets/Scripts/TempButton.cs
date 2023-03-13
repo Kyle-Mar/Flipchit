@@ -18,9 +18,13 @@ public class TempButton : MonoBehaviour
     {
 
         // ask the relay manager for a new code after creating a new relay server.
-        string codeOrError = await networkManager.GetComponentInChildren<RelayManager>().CreateRelay();
-        GameCodeText.gameObject.SetActive(true);
-        GameCodeText.text = codeOrError;
+        Result<string> codeOrError = await networkManager.GetComponentInChildren<RelayManager>().CreateRelay();
+        
+        if (codeOrError.Success)
+        {
+            GameCodeText.gameObject.SetActive(true);
+            GameCodeText.text = codeOrError.Value;
+        }
 
         //TODO: WE NEED TO IMPLEMENT UNITY LOBBY I THINK.
         //gameObject.transform.parent.gameObject.SetActive(false);
@@ -29,7 +33,7 @@ public class TempButton : MonoBehaviour
     public async void StartClient()
     {
         //GameObject.Find("NetworkManager").GetComponent<NetworkManager>().StartClient();
-        string status = await networkManager.GetComponentInChildren<RelayManager>().JoinRelay(GameCode.Code);
+        await networkManager.GetComponentInChildren<RelayManager>().JoinRelay(GameCode.Code);
         GameCodeText.gameObject.SetActive(false);
         //gameObject.transform.parent.gameObject.SetActive(false);
     }
